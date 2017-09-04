@@ -40,10 +40,33 @@ class ApplicationController < Sinatra::Base
 	end
 
 	get '/users/home' do 
-		@user = User.find(session[:user_id])
-		
-
-		erb :'/users/home'
+		if logged_in?	
+			@user = User.find(session[:user_id])
+			erb :'/users/home'
+		else
+			redirect '/'
+		end
 	end
 
+	post '/new_wish' do
+		if logged_in?
+			@user = User.find(session[:user_id])
+			@new_wish = Wish.new(:content => params[:content])
+			@new_wish.user_id = @user.id #which ever user is logged in
+			erb :'/wishes/new_wish'
+		else
+			redirect '/'
+		end
+	end
+
+
 end
+
+
+
+
+
+
+
+
+
