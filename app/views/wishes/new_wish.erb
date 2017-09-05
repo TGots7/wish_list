@@ -10,7 +10,9 @@
 
 	<p> <%= @new_wish.content %> </p>
 
-	<button type="button"><a href="/edit">Edit Wish</a></button>
+	<form method="get" action="/wishes/<%= @new_wish.id %>/edit">
+		<button type="submit">-Edit-</button>
+	</form>
 	<form moethod="POST" action="/delete/<%= @new_wish.id %>">
 		<input type="hidden" name="_method" value="delete">
 		<input type="submit" name="submit" value="Delete">

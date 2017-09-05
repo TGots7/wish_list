@@ -78,8 +78,33 @@ class ApplicationController < Sinatra::Base
 	get '/all_wishes' do
 		if logged_in?
 			@user = current_user
-			binding.pry
 			erb :'/wishes/all_wishes'
+		else
+			redirect '/'
+		end
+	end
+
+	get '/wishes/:id/edit' do
+		@wish = Wish.find_by_id(params[:id])
+		erb :'/wishes/edit_wish'
+	end
+
+	patch '/wishes/:id' do
+		if logged_in?
+			@wish = Wish.find_by_id(params[:id])
+			@wish.content = params[:content]
+			@wish.save
+
+			redirect '/users/home'
+		else
+			redirect '/'
+		end
+	end
+
+	post '/logout' do
+		if logged_in?
+			session.clear
+			redirect '/'
 		else
 			redirect '/'
 		end

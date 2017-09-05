@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Your Christmas Wish List!!!</title>
+</head>
+<body>
+	<h1>Welcome <%= @wish.user.name %> </h1>
+
+	<h4>Edit this wish</h4>
+	<form method="POST" action="/wishes/<%= @wish.id %>">
+	<input type="hidden" name="_method" value="patch">
+	Wish: <input type="text" name="content" value="<%= @wish.content %>">
+	<input type="submit" name="submit" value="submit">
+	</form>
+
+
+</body>
+</html>

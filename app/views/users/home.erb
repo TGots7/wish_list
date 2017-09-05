@@ -5,12 +5,15 @@
 </head>
 <body>
 	<h1>Welcome <%=@user.name%> </h1>
-
 	<!--Add all wishes to be seen! -->
-
+	<ol>
+	<% Wish.all.each do |wish| %>
+	<% if wish.user.name == @user.name %>
+		<li><%= wish.content %></li>
+	<% end %>
+	<% end %>
+	</ol>
 	<h4><a href="/wishes/add_wish">Add to your Wish List</a></h4>
-
-
 
 </body>
 </html>
