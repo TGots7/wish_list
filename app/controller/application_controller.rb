@@ -1,5 +1,9 @@
+require 'rack-flash'
+
 class ApplicationController < Sinatra::Base
 
+	use Rack::Flash
+	
 	configure do
 		set :public_folder, 'public'
 		set :views, "app/views"
@@ -35,6 +39,7 @@ class ApplicationController < Sinatra::Base
 			@user.save
 			session[:user_id] = @user.id 
 
+
 			redirect '/users/home'
 		end
 	end
@@ -54,6 +59,8 @@ class ApplicationController < Sinatra::Base
 			@user = User.find_by(email: params[:email])
 			if @user && @user.authenticate(params[:password])
 				session[:user_id] = @user.id
+
+				flash[:message] = "You logged in!"
 				redirect '/users/home'
 			else
 				redirect '/log_in'
