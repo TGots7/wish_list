@@ -7,6 +7,17 @@ class ApplicationController < Sinatra::Base
 		set :session_secret, "secret"
 	end
 
+	helpers do
+	    def logged_in?
+	      !!session[:user_id]
+
+	    end
+	    def current_user
+	      User.find(session[:user_id])
+
+	    end
+	 end
+
 	get '/' do
 		erb :index
 	end
@@ -48,11 +59,17 @@ class ApplicationController < Sinatra::Base
 		end
 	end
 
+	get '/wishes/add_wish' do
+		erb :'/wishes/add_wish'
+	end
+
 	post '/new_wish' do
 		if logged_in?
 			@user = User.find(session[:user_id])
-			@new_wish = Wish.new(:content => params[:content])
+			@new_wish = Wish.new(:content => params[:wish])
 			@new_wish.user_id = @user.id #which ever user is logged in
+			@new_wish.save
+			
 			erb :'/wishes/new_wish'
 		else
 			redirect '/'
