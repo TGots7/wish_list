@@ -26,7 +26,11 @@ class ApplicationController < Sinatra::Base
 	end
 
 	get '/sign_up' do
-		erb :'/users/sign_up'
+		if logged_in?
+			redirect '/home'
+		else
+			erb :'/users/sign_up'
+		end
 	end
 
 	post '/sign_up' do 
@@ -41,13 +45,13 @@ class ApplicationController < Sinatra::Base
 			session[:user_id] = @user.id 
 
 			flash[:message] = "You signed up!"
-			redirect '/users/home'
+			redirect '/home'
 		end
 	end
 
 	get '/log_in' do 
 		if logged_in?
-			redirect '/users/home'
+			redirect '/home'
 		else
 			erb :'/users/log_in'
 		end
@@ -63,14 +67,14 @@ class ApplicationController < Sinatra::Base
 				session[:user_id] = @user.id
 
 				flash[:message] = "You logged in!"
-				redirect '/users/home'
+				redirect '/home'
 			else
 				redirect '/log_in'
 			end
 		end
 	end
 
-	get '/users/home' do 
+	get '/home' do 
 		if logged_in?	
 			@user = User.find(session[:user_id])
 			erb :'/users/home'
@@ -79,13 +83,13 @@ class ApplicationController < Sinatra::Base
 		end
 	end
 
-	get '/wishes/add_wish' do
+	get '/add_wish' do
 		erb :'/wishes/add_wish'
 	end
 
 	post '/new_wish' do
 		if params[:wish].empty? || params[:wish] == "Add a wish"
-			redirect '/wishes/add_wish'
+			redirect '/add_wish'
 		else
 			if logged_in?
 				@user = User.find(session[:user_id])
@@ -122,7 +126,7 @@ class ApplicationController < Sinatra::Base
 			@wish.save
 
 			flash[:message] = "Your wish was edited"
-			redirect '/users/home'
+			redirect '/home'
 		else
 			redirect '/'
 		end
@@ -139,7 +143,7 @@ class ApplicationController < Sinatra::Base
 			@wish.delete
 
 			flash[:message] = "Your wish was deleted"
-			redirect '/users/home'
+			redirect '/home'
 		else
 			redirect '/'
 		end

@@ -13,40 +13,49 @@
 
 	<h3 class="text-center">Here is Everyones wishes!</h3>
 
-<div class="box">
+
 	<% Wish.all.each do |wish| %>
-	
+		<div class="container">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="span4 offset4" id="box">
+						<% if wish.user.name == @user.name %>
+							
+							<h4> <u> YOU</u> wished </h4>
+						<% else %>
 
-			<% if wish.user.name == @user.name %>
-				<h4 class="text-center"> <u> YOU</u> wished </h4>
-			<% else %>
-				<h4 class="text-center"> <%= wish.user.name %> wished:</h4>
-			<% end %>
+							<h4> <%= wish.user.name %> wished</h4>
+						<% end %>
 
-			<p class="text-center"> <%= wish.content %> </p>
-				<% if wish.user.name == @user.name %>
-					<form method="get" action="/wishes/<%= wish.id %>/edit" class="text-center">
-						<button type="/wishes/<%= wish.id %>/edit">-Edit-</button>
-					</form>
-					<form method="POST" action="/wishes/<%= wish.id %>/delete" class="text-center">
-						<input id="hidden" type="hidden" name="_method" value="delete">
-						<input type="submit" name="submit" value="Delete">
-					</form>
-				<% end %>
-			<% end %>
-			<br><br>
-</div>
+						<p class="text-center"> <%= wish.content %> </p>
+						<% if wish.user.name == @user.name %>
+							<form method="get" action="/wishes/<%= wish.id %>/edit" class="text-center">
+								<button type="/wishes/<%= wish.id %>/edit">-Edit-</button>
+							</form>
+							<form method="POST" action="/wishes/<%= wish.id %>/delete" class="text-center">
+								<input id="hidden" type="hidden" name="_method" value="delete">
+								<input type="submit" name="submit" value="Delete">
+							</form>
+							
+						<% end %>
+					</div>		
+				</div>
+			</div>
+		</div>
+	<% end %>
+			
 
-	<form method="get" action="/users/home" class="text-center">
-		<button type="submit">-My page-</button>
-	</form>
 
-	<form method="get" action="/logout" class="text-center">
-		<button type="submit">-LOGOUT-</button>
-	</form>
+		<form method="get" action="/home" class="text-center">
+			<button type="submit">-My page-</button>
+		</form>
+
+		<form method="get" action="/logout" class="text-center">
+			<button type="submit">-LOGOUT-</button>
+		</form>
 
 	<script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-	</body>
+	
 </body>
 </html>

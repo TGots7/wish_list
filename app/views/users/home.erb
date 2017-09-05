@@ -2,45 +2,48 @@
 <html>
 <head>
 	<title>Your Christmas Wish List!!!</title>
-	<title>Your Christmas Wish List!!!</title>
 	<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <!-- <link rel='stylesheet' href='./styles/bootstrap.min.css' /> -->
-    <link rel="stylesheet" href="/public/stylesheets/wishes.css">
-    
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="/css/wishes.css">
 </head>
 <body>
+
 	<% if flash.has?(:message) %>
-	  <div class="flash_green"><%= flash[:message] %></div>
+	  <%= flash[:message] %>
 	<% end %>
-	<h1>Welcome <%=@user.name%> </h1>
+
+	<h1>Welcome <%=@user.name.capitalize %> </h1>
+	
 	<!--Add all wishes to be seen! -->
-	<ol>
+
 	<% Wish.all.each do |wish| %>
-	<% if wish.user.name == @user.name %>
-		<li><%= wish.content %> 
-			<form method="get" action="/wishes/<%= wish.id %>/edit">
-				<button type="submit">-Edit-</button>
-			</form>
-			<form method="POST" action="/wishes/<%= wish.id %>/delete">
-				<input id="hidden" type="hidden" name="_method" value="delete">
-				<input type="submit" name="submit" value="Delete">
-			</form>
-		</li>
+	
+			<% if wish.user.name == @user.name %>
+			
+				<%= wish.content %> 
+					<form method="get" action="/wishes/<%= wish.id %>/edit">
+						<button type="submit">-Edit-</button>
+					</form>
+					<form method="POST" action="/wishes/<%= wish.id %>/delete">
+						<input id="hidden" type="hidden" name="_method" value="delete">
+						<input type="submit" name="submit" value="Delete">
+					</form>
+				
+			<% end %>
 	<% end %>
-	<% end %>
-	</ol>
+	
 
-	<h4><a href="/wishes/add_wish">Add to your Wish List</a></h4>
+	<h4><a href="/add_wish">Add to your Wish List</a></h4>
 
-	<h4><a href="/all_wishes">See Everyones Wishes</a>
+	<h4><a href="/all_wishes">See Everyones Wishes</a></h4>
 
 	<form method="get" action="/logout">
 		<button type="submit">-Logout-</button>
 	</form>
-
-
-
-
+    
+	<script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	
 </body>
 </html>
