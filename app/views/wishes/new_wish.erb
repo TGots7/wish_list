@@ -13,7 +13,7 @@
 	<form method="get" action="/wishes/<%= @new_wish.id %>/edit">
 		<button type="submit">-Edit-</button>
 	</form>
-	<form moethod="POST" action="/delete/<%= @new_wish.id %>">
+	<form method="post" action="/wishes/<%= @new_wish.id %>/delete">
 		<input type="hidden" name="_method" value="delete">
 		<input type="submit" name="submit" value="Delete">
 	</form>

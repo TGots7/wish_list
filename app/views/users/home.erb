@@ -9,7 +9,15 @@
 	<ol>
 	<% Wish.all.each do |wish| %>
 	<% if wish.user.name == @user.name %>
-		<li><%= wish.content %></li>
+		<li><%= wish.content %> 
+			<form method="get" action="/wishes/<%= wish.id %>/edit">
+				<button type="submit">-Edit-</button>
+			</form>
+			<form method="POST" action="/wishes/<%= wish.id %>/delete">
+				<input id="hidden" type="hidden" name="_method" value="delete">
+				<input type="submit" name="submit" value="Delete">
+			</form>
+		</li>
 	<% end %>
 	<% end %>
 	</ol>

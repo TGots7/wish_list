@@ -35,7 +35,11 @@ class ApplicationController < Sinatra::Base
 	end
 
 	get '/log_in' do 
-		erb :'/users/log_in'
+		if logged_in?
+			redirect '/users/home'
+		else
+			erb :'/users/log_in'
+		end
 	end
 
 	post '/log_in' do 
@@ -94,6 +98,22 @@ class ApplicationController < Sinatra::Base
 			@wish = Wish.find_by_id(params[:id])
 			@wish.content = params[:content]
 			@wish.save
+
+			redirect '/users/home'
+		else
+			redirect '/'
+		end
+	end
+
+	# get '/wishes/<%= wish.id %>/delete' do
+	#  	@wish = Wish.find_by_id(params[:id])
+	# 	erb :'/wishes/edit_wish'
+	# end
+
+	delete '/wishes/:id/delete' do
+		if logged_in?
+			@wish = Wish.find_by_id(params[:id])
+			@wish.delete
 
 			redirect '/users/home'
 		else
