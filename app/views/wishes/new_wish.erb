@@ -4,6 +4,10 @@
 	<title>Your Christmas Wish List!!!</title>
 </head>
 <body>
+	<% if flash.has?(:message) %>
+	  <%= flash[:message] %>
+	<% end %>
+	
 	<h1>Welcome <%= @user.name %> </h1>
 
 	<h5>Here is the new wish you just added to your wish list</h5>

@@ -93,6 +93,7 @@ class ApplicationController < Sinatra::Base
 				@new_wish.user_id = @user.id #which ever user is logged in
 				@new_wish.save
 				
+				flash[:message] = "Here is your newly created wish!"
 				erb :'/wishes/new_wish'
 			else
 				redirect '/'
@@ -120,6 +121,7 @@ class ApplicationController < Sinatra::Base
 			@wish.content = params[:content]
 			@wish.save
 
+			flash[:message] = "Your wish was edited"
 			redirect '/users/home'
 		else
 			redirect '/'
@@ -136,6 +138,7 @@ class ApplicationController < Sinatra::Base
 			@wish = Wish.find_by_id(params[:id])
 			@wish.delete
 
+			flash[:message] = "Your wish was deleted"
 			redirect '/users/home'
 		else
 			redirect '/'
