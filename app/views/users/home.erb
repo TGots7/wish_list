@@ -2,10 +2,16 @@
 <html>
 <head>
 	<title>Your Christmas Wish List!!!</title>
+	<title>Your Christmas Wish List!!!</title>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <!-- <link rel='stylesheet' href='./styles/bootstrap.min.css' /> -->
+    <link rel="stylesheet" href="/public/stylesheets/wishes.css">
+    
 </head>
 <body>
 	<% if flash.has?(:message) %>
-	  <%= flash[:message] %>
+	  <div class="flash_green"><%= flash[:message] %></div>
 	<% end %>
 	<h1>Welcome <%=@user.name%> </h1>
 	<!--Add all wishes to be seen! -->
