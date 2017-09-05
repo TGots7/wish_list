@@ -31,6 +31,7 @@ class ApplicationController < Sinatra::Base
 
 	post '/sign_up' do 
 		if params[:name].empty? || params[:email].empty? || params[:password].empty?
+			flash[:message] = "Please, properly fill out Sign Up form"
 			redirect '/sign_up'
 		else
 			@user = User.new(:name => params[:name])
@@ -54,6 +55,7 @@ class ApplicationController < Sinatra::Base
 
 	post '/log_in' do 
 		if params[:name].empty? || params[:email].empty? || params[:password].empty?
+			flash[:message] = "Please, properly fill out Log In form"
 			redirect '/log_in'
 		else
 			@user = User.find_by(email: params[:email])

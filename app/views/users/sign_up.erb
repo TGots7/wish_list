@@ -4,14 +4,17 @@
 	<title>Your Christmas Wish List!!!</title>
 </head>
 <body>
-	<h1>Welcome back, let look at your Xmas Wish List</h1>
+	<% if flash.has?(:message) %>
+	  <%= flash[:message] %>
+	<% end %>
+	<h1>Happy to have you, let look at your Xmas Wish List</h1>
 
 	<h3> Sign Up to see your wish list! </h3>
 
 	<form method="POST" action="/sign_up">
-		Name: <input type="text" name="name" value="Name for Santa to check">
-		Email: <input type="text" name="email" value="Email for Santa to write to">
-		Password: <input type="text" name="password" value="Keep your list safe with a password">
+		Name: <input type="text" name="name" value="">
+		Email: <input type="text" name="email" value="">
+		Password: <input type="text" name="password" value="">
 		<input type="submit" name="submit" value="submit">
 	</form>
 
