@@ -12,25 +12,32 @@
 	  <%= flash[:message] %>
 	<% end %>
 	
-	<h1>Welcome <%= @user.name %> </h1>
+	<h1 class="text-center">Welcome <%= @user.name.capitalize %> </h1>
 
-	<h5>Here is the new wish you just added to your wish list</h5>
+	<h5 class="text-center">Here is the new wish you just added to your wish list</h5>
+			<div class="container">
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="span4 offset4" id="box">
+							<p class="text-center"> <%= @new_wish.content %> </p>
 
-	<p> <%= @new_wish.content %> </p>
+								<form method="get" action="/wishes/<%= @new_wish.id %>/edit" class="text-center">
+									<button type="submit">-Edit-</button>
+								</form>
+								<form method="post" action="/wishes/<%= @new_wish.id %>/delete" class="text-center">
+									<input type="hidden" name="_method" value="delete">
+									<input type="submit" name="submit" value="Delete">
+								</form>
+						</div>
+					</div>
+				</div>
+			</div>
 
-	<form method="get" action="/wishes/<%= @new_wish.id %>/edit">
-		<button type="submit">-Edit-</button>
-	</form>
-	<form method="post" action="/wishes/<%= @new_wish.id %>/delete">
-		<input type="hidden" name="_method" value="delete">
-		<input type="submit" name="submit" value="Delete">
-	</form>
-
-	<form method="get" action="/home">
+	<form method="get" action="/home" class="text-center">
 		<button type="submit">-My page-</button>
 	</form>
 
-	<a href="/all_wishes">See Everyones Wishes</a>
+	<h5 class="text-center"><a href="/all_wishes">See Everyones Wishes</a></h5>
 
 	<script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>

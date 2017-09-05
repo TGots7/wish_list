@@ -4,9 +4,10 @@
 	background-color: red;
 }
 
-.falsh_green {
+.flash_green {
 	text-align: center;
-	background-color: green;
+	border: 3px solid red;
+	background-color: yellow;
 }
 
 #box {

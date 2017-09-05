@@ -4,41 +4,46 @@
 	<title>Your Christmas Wish List!!!</title>
 	<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" type="text/css" href="/css/wishes.css">
 </head>
 <body>
 
 	<% if flash.has?(:message) %>
-	  <%= flash[:message] %>
+	 <div class="flash_green"> <%= flash[:message] %> </div>
 	<% end %>
 
-	<h1>Welcome <%=@user.name.capitalize %> </h1>
+	<h1 class="text-center">Welcome <%=@user.name.capitalize %> </h1>
 	
 	<!--Add all wishes to be seen! -->
-
+	<h4 class="text-center">Here are your wishes</h4>
 	<% Wish.all.each do |wish| %>
-	
-			<% if wish.user.name == @user.name %>
-			
-				<%= wish.content %> 
-					<form method="get" action="/wishes/<%= wish.id %>/edit">
-						<button type="submit">-Edit-</button>
-					</form>
-					<form method="POST" action="/wishes/<%= wish.id %>/delete">
-						<input id="hidden" type="hidden" name="_method" value="delete">
-						<input type="submit" name="submit" value="Delete">
-					</form>
-				
-			<% end %>
+		<% if wish.user.name == @user.name %>
+			<div class="container">
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="span4 offset4" id="box">		
+							<p class="text-center" ><%= wish.content %> </p>
+								<form method="get" action="/wishes/<%= wish.id %>/edit" class="text-center">
+									<button type="submit">-Edit-</button>
+								</form>
+								<form method="POST" action="/wishes/<%= wish.id %>/delete" class="text-center">
+									<input id="hidden" type="hidden" name="_method" value="delete">
+									<input type="submit" name="submit" value="Delete">
+								</form>
+						</div>		
+					</div>
+				</div>
+			</div>
+		<% end %>			
 	<% end %>
 	
 
-	<h4><a href="/add_wish">Add to your Wish List</a></h4>
+	<h4 class="text-center"><a href="/add_wish">Add to your Wish List</a></h4>
 
-	<h4><a href="/all_wishes">See Everyones Wishes</a></h4>
+	<h4 class="text-center"><a href="/all_wishes">See Everyones Wishes</a></h4>
 
-	<form method="get" action="/logout">
+	<form method="get" action="/logout" class="text-center">
 		<button type="submit">-Logout-</button>
 	</form>
     
