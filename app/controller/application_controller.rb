@@ -26,12 +26,17 @@ class ApplicationController < Sinatra::Base
 	end
 
 	post '/sign_up' do 
-		@user = User.new(:name => params[:name])
-		@user.email = params[:email]
-		@user.password = params[:password]
-		@user.save
+		if params[:name].empty? || params[:email].empty? || params[:password].empty?
+			redirect '/sign_up'
+		else
+			@user = User.new(:name => params[:name])
+			@user.email = params[:email]
+			@user.password = params[:password]
+			@user.save
+			session[:user_id] = @user.id 
 
-		redirect '/log_in'
+			redirect '/users/home'
+		end
 	end
 
 	get '/log_in' do 
@@ -43,13 +48,16 @@ class ApplicationController < Sinatra::Base
 	end
 
 	post '/log_in' do 
-		@user = User.find_by(email: params[:email])
-
-		if @user && @user.authenticate(params[:password])
-			session[:user_id] = @user.id
-			redirect '/users/home'
-		else
+		if params[:name].empty? || params[:email].empty? || params[:password].empty?
 			redirect '/log_in'
+		else
+			@user = User.find_by(email: params[:email])
+			if @user && @user.authenticate(params[:password])
+				session[:user_id] = @user.id
+				redirect '/users/home'
+			else
+				redirect '/log_in'
+			end
 		end
 	end
 
@@ -121,7 +129,7 @@ class ApplicationController < Sinatra::Base
 		end
 	end
 
-	post '/logout' do
+	get '/logout' do
 		if logged_in?
 			session.clear
 			redirect '/'

@@ -5,22 +5,32 @@
 </head>
 <body>
 	<h1>Welcome <%= @user.name %> </h1>
-	<form method="POST" action="/logout">
-		<button type="submit">LOGOUT</button>
-	</form>
 
-	<h4>Here is a list of everyones wishes!</h4>
+	<h3>Here is Everyones wishes!</h3>
 
 	<% Wish.all.each do |wish| %>
 
-	<h6> <%= wish.user.name %> </h6>
+	<h4> <%= wish.user.name %> wished:</h4>
 	<p> <%= wish.content %> </p>
 		<% if wish.user.name == @user.name %>
 			<form method="get" action="/wishes/<%= wish.id %>/edit">
 				<button type="/wishes/<%= wish.id %>/edit">-Edit-</button>
 			</form>
+			<form method="POST" action="/wishes/<%= wish.id %>/delete">
+				<input id="hidden" type="hidden" name="_method" value="delete">
+				<input type="submit" name="submit" value="Delete">
+			</form>
 		<% end %>
 	<% end %>
+	<br><br>
+
+	<form method="get" action="/users/home">
+		<button type="submit">-My page-</button>
+	</form>
+
+	<form method="get" action="/logout">
+		<button type="submit">-LOGOUT-</button>
+	</form>
 
 </body>
 </html>
