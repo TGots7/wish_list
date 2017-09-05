@@ -10,7 +10,12 @@
 
 	<% Wish.all.each do |wish| %>
 
-	<h4> <%= wish.user.name %> wished:</h4>
+	<% if wish.user.name == @user.name %>
+		<h4> <u> YOU</u> wished </h4>
+	<% else %>
+		<h4> <%= wish.user.name %> wished:</h4>
+	<% end %>
+
 	<p> <%= wish.content %> </p>
 		<% if wish.user.name == @user.name %>
 			<form method="get" action="/wishes/<%= wish.id %>/edit">

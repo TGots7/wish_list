@@ -75,15 +75,19 @@ class ApplicationController < Sinatra::Base
 	end
 
 	post '/new_wish' do
-		if logged_in?
-			@user = User.find(session[:user_id])
-			@new_wish = Wish.new(:content => params[:wish])
-			@new_wish.user_id = @user.id #which ever user is logged in
-			@new_wish.save
-			
-			erb :'/wishes/new_wish'
+		if params[:wish].empty? || params[:wish] == "Add a wish"
+			redirect '/wishes/add_wish'
 		else
-			redirect '/'
+			if logged_in?
+				@user = User.find(session[:user_id])
+				@new_wish = Wish.new(:content => params[:wish])
+				@new_wish.user_id = @user.id #which ever user is logged in
+				@new_wish.save
+				
+				erb :'/wishes/new_wish'
+			else
+				redirect '/'
+			end
 		end
 	end
 
