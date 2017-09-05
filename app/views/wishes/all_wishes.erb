@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Your Christmas Wish List!!!</title>
+</head>
+<body>
+	<h1>Welcome <%= @user.name %> </h1>
+
+	<h4>Here is a list of everyones wishes!</h4>
+
+	<% Wish.all.each do |wish| %>
+
+	<h6> <%= wish.user.name %> </h6>
+	<p> <%= wish.content %> </p>
+		<% if wish.user.name == @user.name %>
+			<button type="button">EDIT</button>
+		<% end %>
+	<% end %>
+
+</body>
+</html>

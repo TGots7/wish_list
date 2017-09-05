@@ -14,7 +14,6 @@ class ApplicationController < Sinatra::Base
 	    end
 	    def current_user
 	      User.find(session[:user_id])
-
 	    end
 	 end
 
@@ -71,6 +70,16 @@ class ApplicationController < Sinatra::Base
 			@new_wish.save
 			
 			erb :'/wishes/new_wish'
+		else
+			redirect '/'
+		end
+	end
+
+	get '/all_wishes' do
+		if logged_in?
+			@user = current_user
+			binding.pry
+			erb :'/wishes/all_wishes'
 		else
 			redirect '/'
 		end
