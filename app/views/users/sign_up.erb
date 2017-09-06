@@ -9,18 +9,19 @@
 </head>
 <body>
 	<% if flash.has?(:message) %>
-	  <%= flash[:message] %>
+	  <div class="flash_red"> <%= flash[:message] %></div>
 	<% end %>
-	<h1>Happy to have you, let look at your Xmas Wish List</h1>
+	<h2 class="text-center">Happy to have you, look at your Xmas Wish List</h2>
 
-	<h3> Sign Up to see your wish list! </h3>
+	<h4 class="text-center"> Sign Up to see your wish list! </h4>
 
-	<form method="POST" action="/sign_up">
+	<form method="POST" action="/sign_up" class="text-center">
 		Name: <input type="text" name="name" value="">
 		Email: <input type="text" name="email" value="">
 		Password: <input type="password" name="password" value="">
 		<input type="submit" name="submit" value="submit">
 	</form>
+
 	<script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>

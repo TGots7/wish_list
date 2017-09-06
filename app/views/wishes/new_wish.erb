@@ -9,7 +9,7 @@
 </head>
 <body>
 	<% if flash.has?(:message) %>
-	  <%= flash[:message] %>
+	  <div class="flash_green"><%= flash[:message] %></div>
 	<% end %>
 	
 	<h1 class="text-center">Welcome <%= @user.name.capitalize %> </h1>

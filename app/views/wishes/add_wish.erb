@@ -8,6 +8,10 @@
     <link rel="stylesheet" type="text/css" href="/css/wishes.css">
 </head>
 <body>
+	<% if flash.has?(:message) %>
+	  <div class="flash_red"><%= flash[:message] %></div>
+	<% end %>
+
 	<h1 class="text-center">Add a wish to your Xmas Wish List</h1>
 
 	<h3 class="text-center"> New wish! </h3>

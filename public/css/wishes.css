@@ -10,6 +10,12 @@
 	background-color: yellow;
 }
 
+.flash_red {
+	text-align: center;
+	border: 3px solid red;
+	background-color: red;
+}
+
 #box {
     display: block;
     border: 2px solid black;

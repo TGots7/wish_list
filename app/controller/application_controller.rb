@@ -84,11 +84,13 @@ class ApplicationController < Sinatra::Base
 	end
 
 	get '/add_wish' do
+
 		erb :'/wishes/add_wish'
 	end
 
 	post '/new_wish' do
 		if params[:wish].empty? || params[:wish] == "Add a wish"
+			flash[:message] = "Please properly fill out a wish"
 			redirect '/add_wish'
 		else
 			if logged_in?
@@ -120,15 +122,19 @@ class ApplicationController < Sinatra::Base
 	end
 
 	patch '/wishes/:id' do
-		if logged_in?
-			@wish = Wish.find_by_id(params[:id])
-			@wish.content = params[:content]
-			@wish.save
-
-			flash[:message] = "Your wish was edited"
+		if params[:content].empty?
 			redirect '/home'
 		else
-			redirect '/'
+			if logged_in?
+				@wish = Wish.find_by_id(params[:id])
+				@wish.content = params[:content]
+				@wish.save
+
+				flash[:message] = "Your wish was edited"
+				redirect '/home'
+			else
+				redirect '/'
+			end
 		end
 	end
 
