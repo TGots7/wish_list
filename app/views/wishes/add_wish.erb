@@ -17,9 +17,23 @@
 	<h3 class="text-center"> New wish! </h3>
 
 	<form method="POST" action="/new_wish" class="text-center">	
-		Wish: <input type="text" name="wish" value="Add a wish">
-		<input type="submit" name="submit" value="submit">
-	</form>
+		<input type="text" name="wish[content]" value="Add a wish"><br>
+		
+	
+        <% Event.all.each do |event| %>
+            <input id="event_<%= event.id %>" type="checkbox" name="wish[event_ids][]" value="<%= event.id %>" class="text-center"> <%= event.event %>
+        <% end %>
+        
+	        <br> or create new Event:<br>
+	        <input type="text" name="event" class="text-center"><br>
+	        <input type="submit" name="submit" value="submit"><br>
+	 </form>
+    
+
+    <form method="get" action="/home" class="text-center">
+			<button type="submit">-My page-</button>
+		</form>
+
 
 	<script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>

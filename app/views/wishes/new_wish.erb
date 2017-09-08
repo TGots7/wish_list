@@ -19,7 +19,11 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="span4 offset4" id="box">
-							<p class="text-center"> <%= @new_wish.content %> </p>
+							<div class="text"><p class="text-center"> <%= @new_wish.content %> </p></div>
+
+								<% Event.all.each do |e| %>
+						         <input type="checkbox" name="wish[e]" value="<%= e.event %>" class="text-center" <%= 'checked' if @new_wish.events.include?(e) %>> <%= e.event %> 
+						        <% end %>
 
 								<form method="get" action="/wishes/<%= @new_wish.id %>/edit" class="text-center">
 									<button type="submit">-Edit-</button>

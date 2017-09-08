@@ -22,10 +22,12 @@ class ApplicationController < Sinatra::Base
 	 end
 
 	get '/' do
+		
 		erb :index
 	end
 
 	get '/sign_up' do
+		
 		if logged_in?
 			redirect '/home'
 		else
@@ -84,7 +86,7 @@ class ApplicationController < Sinatra::Base
 	end
 
 	get '/add_wish' do
-
+		
 		erb :'/wishes/add_wish'
 	end
 
@@ -94,10 +96,16 @@ class ApplicationController < Sinatra::Base
 			redirect '/add_wish'
 		else
 			if logged_in?
+
 				@user = User.find(session[:user_id])
-				@new_wish = Wish.new(:content => params[:wish])
+				@new_wish = Wish.create(params[:wish])
 				@new_wish.user_id = @user.id #which ever user is logged in
-				@new_wish.save
+				if params["event"].empty?
+					@new_wish.save
+				else
+					@new_wish.events << Event.find_or_create_by(:event => params["event"])
+					@new_wish.save
+				end
 				
 				flash[:message] = "Here is your newly created wish!"
 				erb :'/wishes/new_wish'
@@ -108,6 +116,7 @@ class ApplicationController < Sinatra::Base
 	end
 
 	get '/all_wishes' do
+		
 		if logged_in?
 			@user = current_user
 			erb :'/wishes/all_wishes'
@@ -122,12 +131,13 @@ class ApplicationController < Sinatra::Base
 	end
 
 	patch '/wishes/:id' do
-		if params[:content].empty?
+		if params[:wish].empty?
 			redirect '/home'
 		else
 			if logged_in?
 				@wish = Wish.find_by_id(params[:id])
 				@wish.content = params[:content]
+				@wish.update(params[:wish])
 				@wish.save
 
 				flash[:message] = "Your wish was edited"

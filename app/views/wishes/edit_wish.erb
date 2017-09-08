@@ -11,11 +11,20 @@
 	<h1>Welcome <%= @wish.user.name %> </h1>
 
 	<h4>Edit this wish</h4>
-	<form method="POST" action="/wishes/<%= @wish.id %>">
-	<input type="hidden" name="_method" value="patch">
-	Wish: <input type="text" name="content" value="<%= @wish.content %>">
-	<input type="submit" name="submit" value="submit">
-	</form>
+	
+
+	<form method="POST" action="/wishes/<%= @wish.id %>" class="text-center">
+		<input type="hidden" name="_method" value="patch">	
+		<input type="text" name="wish[content]" value="<%= @wish.content %>"><br>
+	
+        <% Event.all.each do |event| %>
+            <input id="event_<%= event.id %>" type="checkbox" name="wish[event_ids][]" value="<%= event.id %>" class="text-center"<%= 'checked' if @wish.events.include?(event) %>> <%= event.event %> 
+        <% end %>
+        
+	        <br> or create new Event:<br>
+	        <input type="text" name="event" class="text-center"><br>
+	        <input type="submit" name="submit" value="submit"><br>
+	 </form>
 
 	<script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>

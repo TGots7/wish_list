@@ -18,8 +18,13 @@
 
 #box {
     display: block;
-    border: 2px solid black;
+    border: 3px solid black;
     background-color: lightgreen;
-    margin-top: 5px;
-    margin-bottom: 2px;
+    margin-top: 7px;
+    margin-bottom: 4px;
+}
+.text {
+	background-color: #F76161;
+	border: 2px solid black;
+	margin: 3px;
 }

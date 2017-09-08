@@ -27,7 +27,12 @@
 							<h4> <%= wish.user.name %> wished</h4>
 						<% end %>
 
-						<p class="text-center"> <%= wish.content %> </p>
+						<div class="text"><p class="text-center"> <%= wish.content %> </p></div>
+						
+					        <% Event.all.each do |e| %>
+					            <input type="checkbox" name="wish[e]" value="<%= e.event %>" class="text-center" <%= 'checked' if wish.events.include?(e) %>> <%= e.event %> 
+					        <% end %>
+
 						<% if wish.user.name == @user.name %>
 							<form method="get" action="/wishes/<%= wish.id %>/edit" class="text-center">
 								<button type="/wishes/<%= wish.id %>/edit">-Edit-</button>
