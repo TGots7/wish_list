@@ -1,4 +1,6 @@
-
+body {
+	background-color: #ECECEA ;
+}
 #title {
 	text-align: center;
 	background-color: red;
@@ -15,16 +17,51 @@
 	border: 3px solid red;
 	background-color: red;
 }
+.jumbotron {
+	background-color: #74AFAD;
+	color: white;
+}
 
-#box {
+.box {
     display: block;
     border: 3px solid black;
-    background-color: lightgreen;
+    border-radius: 10px;
+    background-color: #D9853B;
     margin-top: 7px;
     margin-bottom: 4px;
 }
 .text {
-	background-color: #F76161;
+	background-color: #ECECEA;
 	border: 2px solid black;
-	margin: 3px;
+	border-radius: 5px;
+	margin: 5px;
+	margin-top: 10px;
+}
+.home_box {
+	text-align: center;
+	background-color: #D9853B;
+	border: 4px solid black;
+	margin-top: 40px;
+	padding: 30px;
+	border-radius: 50px;
+	height: auto;
+}
+.boxes {
+	text-align: center;
+	background-color: #D9853B;
+	border: 2px solid black;
+	margin: 0px;
+	padding: 10px;
+	border-radius: 50px;
+	height: auto;
+}*/
+#blue {
+	background-color: blue;
+}
+#green {
+	background-color: green;
+}
+.buttons {
+	margin: 5px;
+
 }

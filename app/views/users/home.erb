@@ -1,59 +1,70 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Your Christmas Wish List!!!</title>
-	<meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link rel="stylesheet" type="text/css" href="/css/wishes.css">
-</head>
-<body>
-
 	<% if flash.has?(:message) %>
 	 <div class="flash_green"> <%= flash[:message] %> </div>
 	<% end %>
-
+<div class="jumbotron">
 	<h1 class="text-center">Welcome <%=@user.name.capitalize %> </h1>
-	
+</div>	
 	<!--Add all wishes to be seen! -->
-	<h4 class="text-center">Here are your wishes</h4>
-	<% Wish.all.each do |wish| %>
-		<% if wish.user.name == @user.name %>
-			<div class="container">
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="span4 offset4" id="box">		
-							<div class="text"><p class="text-center" ><%= wish.content %> </p></div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4"></div>
+			<div class="col-sm-4 offset-sm-4 box">
+			<ol>
+				<h4 class="text-center">Your Wish List</h4>
+				<% Wish.all.each do |wish| %>
+				<% if wish.user.name == @user.name %>
+					
+				<li>	<div class="text"><p class="text-center" ><%= wish.content %> </p></div> </li>
 
-							<% Event.all.each do |e| %>
-					            <input type="checkbox" name="wish[e]" value="<%= e.event %>" class="text-center" <%= 'checked' if wish.events.include?(e) %>> <%= e.event %> 
+						<% Event.all.each do |e| %>
+					        <input type="checkbox" name="wish[e]" value="<%= e.event %>" class="text-center" <%= 'checked' if wish.events.include?(e) %>> <%= e.event %> 
 					        <% end %>
-							
-								<form method="get" action="/wishes/<%= wish.id %>/edit" class="text-center">
-									<button type="submit">-Edit-</button>
-								</form>
-								<form method="POST" action="/wishes/<%= wish.id %>/delete" class="text-center">
-									<input id="hidden" type="hidden" name="_method" value="delete">
-									<input type="submit" name="submit" value="Delete">
-								</form>
-						</div>		
-					</div>
-				</div>
-			</div>
-		<% end %>			
-	<% end %>
-	
 
-	<h4 class="text-center"><a href="/add_wish">Add to your Wish List</a></h4>
+					<div class="row">	
+						<div class="col-sm-6">	
+							<form method="get" action="/wishes/<%= wish.id %>/edit" class="text-center buttons" >
+									<button type="submit">-Edit-</button>
+							</form>
+						</div>
+						<div class="col-sm-6">
+							<form method="POST" action="/wishes/<%= wish.id %>/delete" class="text-center buttons">
+								<input id="hidden" type="hidden" name="_method" value="delete">
+								<input type="submit" name="submit" value="-Delete-">
+							</form>
+						</div>	
+					</div>
+				<% end %>			
+				<% end %>
+			</ol>
+			</div>
+		</div>		
+	</div>
+</div>
+	
+		
+
+<div class="row">
+<div class="col-sm-4"></div>
+<div class="col-sm-4">
+	<div class="col-sm-4">
+		<form method="get" action="/add_wish" class="text-center buttons">
+			<button type="submit">-New Wish-</button>
+		</form>
+	</div>
+	<div class="col-sm-4">
+		<form method="get" action="/all_wishes" class="text-center buttons">
+			<button type="submit">-All Wishes-</button>
+		</form>
+	</div>
+
+	<!-- <h4 class="text-center"><a href="/add_wish">Add to your Wish List</a></h4>
 
 	<h4 class="text-center"><a href="/all_wishes">See Everyones Wishes</a></h4>
-
-	<form method="get" action="/logout" class="text-center">
-		<button type="submit">-Logout-</button>
-	</form>
-    
-	<script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	
-</body>
-</html>
+ --><div class="col-sm-4">
+		<form method="get" action="/logout" class="text-center buttons">
+			<button type="submit">-Logout-</button>
+		</form>
+		</div>
+	</div>
+</div>
+   

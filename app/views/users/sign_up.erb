@@ -1,28 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Your Christmas Wish List!!!</title>
-	<meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link rel="stylesheet" type="text/css" href="/css/wishes.css">
-</head>
-<body>
-	<% if flash.has?(:message) %>
+<% if flash.has?(:message) %>
 	  <div class="flash_red"> <%= flash[:message] %></div>
 	<% end %>
-	<h2 class="text-center">Happy to have you, look at your Xmas Wish List</h2>
-
-	<h4 class="text-center"> Sign Up to see your wish list! </h4>
-
-	<form method="POST" action="/sign_up" class="text-center">
-		Name: <input type="text" name="name" value="">
-		Email: <input type="text" name="email" value="">
-		Password: <input type="password" name="password" value="">
-		<input type="submit" name="submit" value="submit">
-	</form>
-
-	<script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-</body>
-</html>
+<div class="jumbotron">	
+	<h2 class="text-center">Time to Make a Wish List</h2>
+	<h3 class="text-center">Sign Up to make your wish list!</h3>
+</div>
+		<div class="container">
+			<div class="row">
+			<div class="col-sm-4"></div>
+				<div class="col-sm-4 offset-sm-4 boxes">
+					<form method="POST" action="/sign_up" class="text-center">
+						<label>Name: </label><br>
+						<input type="text" name="name" value=""><br>
+						<label>Email: </label><br>
+						<input type="text" name="email" value=""><br>
+						<label>Password:</label><br>
+						<input type="password" name="password" value=""><br><br>
+						<input type="submit" name="submit" value="Sign Up">
+					</form>
+				</div>
+			</div>
+		</div>

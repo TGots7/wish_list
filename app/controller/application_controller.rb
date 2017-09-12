@@ -148,11 +148,6 @@ class ApplicationController < Sinatra::Base
 		end
 	end
 
-	# get '/wishes/<%= wish.id %>/delete' do
-	#  	@wish = Wish.find_by_id(params[:id])
-	# 	erb :'/wishes/edit_wish'
-	# end
-
 	delete '/wishes/:id/delete' do
 		if logged_in?
 			@wish = Wish.find_by_id(params[:id])
@@ -173,7 +168,6 @@ class ApplicationController < Sinatra::Base
 			redirect '/'
 		end
 	end
-
 
 end
 
