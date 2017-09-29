@@ -44,6 +44,7 @@ class UserController < ApplicationController
 				flash[:message] = "You logged in!"
 				redirect '/home'
 			else
+				flash[:message] = "Incorrect log in info!"
 				redirect '/log_in'
 			end
 		end
