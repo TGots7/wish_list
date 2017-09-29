@@ -1,0 +1,67 @@
+<h2 class="text-center title">Everyones wishes!</h2>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4"></div>
+			<div class="col-sm-4 box">
+				<% Wish.all.each do |wish| %>
+
+						<% if wish.user.username == current_user.username %>
+							<h4>YOU wished for:</h4>
+						<% else %>
+							<h4><%= wish.user.username %> wished for:</h4>
+						<% end %>
+
+						<div class="text"><p class="text-center"> <%= wish.content %> </p></div>
+						
+					        <% Event.all.each do |event| %>
+					            <input 
+					            	type="checkbox" 
+					            	name="wish[event]" 
+					            	value="<%= event.event %>" 
+					            	class="text-center" 
+					            	<%= 'checked' if wish.events.include?(event) %>> <%= event.event %> 
+					        <% end %>
+
+							<% if wish.user.username == current_user.username %>
+								<div class="row">
+									<div class="col-xs-6">
+										<form method="get" action="/wishes/<%= wish.id %>/edit" class="text-center buttons">
+											<button type="/wishes/<%= wish.id %>/edit" >-Edit-</button>
+										</form>
+									</div>
+									<div class="col-xs-6">
+										<form method="POST" action="/wishes/<%= wish.id %>/delete" class="text-center buttons">
+											<input id="hidden" type="hidden" name="_method" value="delete">
+											<input type="submit" name="submit" value="-Delete-">
+										</form>
+									</div>
+								</div>	
+							<% end %>
+						
+				<% end %>
+		</div>
+	</div>
+
+
+<div class="row">
+	<div class="col-sm-4"></div>
+		<div class="col-sm-4">
+			<div class="col-sm-4">
+					<a href="/home" class="text-center buttons">
+						<button type="submit">My page</button>
+					</a>
+			</div>
+			<div class="col-sm-4">
+					<a href="/wishes/new" class="text-center buttons">
+						<button type="submit">New Wish</button>
+					</a>
+			</div>
+	 		<div class="col-sm-4">
+					<a href="/logout" class="text-center buttons">
+						<button type="submit">Logout</button>
+					</a>
+			</div>
+		</div>
+</div>
+</div>
+

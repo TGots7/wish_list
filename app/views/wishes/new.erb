@@ -1,16 +1,11 @@
-<% if flash.has?(:message) %>
-  <div class="flash_red"><%= flash[:message] %></div>
-<% end %>
-<div class="jumbotron">
-	<h1 class="text-center">Add a wish to your Xmas Wish List</h1>
-</div>
-	<h3 class="text-center"> New wish! </h3>
+<h1 class="text-center title">Add a wish to your Xmas Wish List</h1>
+<h3 class="text-center title-2"> New wish! </h3>
 
 <div class="container">
 	<div class="row">
 		<div class="col-sm-4"></div>
 			<div class="col-sm-4 box">
-				<form method="POST" action="/new_wish" class="text-center">	
+				<form method="POST" action="/wishes" class="text-center">	
 					<label>Add Wish:</label><br>
 					<input type="text" name="wish[content]" value="Add a wish"><br>
 					
@@ -23,9 +18,16 @@
 				        <input type="submit" name="submit" value="submit" class="buttons"><br>
 				 </form>
 		 	</div>
-	</div>
- </div>   
+	</div>   
 
-<form method="get" action="/home" class="text-center">
-	<button type="submit">-My page-</button>
-</form>
+	<div class="row">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+					<a href="/home" class="text-center buttons">
+						<button type="submit">-My Page-</button>
+					</a>
+			</div>
+	</div>
+</div>

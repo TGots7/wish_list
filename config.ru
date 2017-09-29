@@ -7,4 +7,6 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
+use WishController
+use UserController
 run ApplicationController

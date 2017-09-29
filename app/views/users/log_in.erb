@@ -1,26 +1,20 @@
-	<% if flash.has?(:message) %>
-	  <div class="flash_red"><%= flash[:message] %></div>
-	<% end %>
-<div class="jumbotron">
-	<h2 class="text-center">Welcome Back</h2>
-	<h3 class="text-center">Let's log in and look at your Wish List</h3><br>
-</div>
-	
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4"></div>
-					<div class="col-sm-4 offset-sm-4 boxes">
-						<form method="POST" action="/log_in" class="text-center">
-							<label>Name: </label><br>
-							<input type="text" name="name" value=""><br>
-							<label>Email: </label><br>
-							<input type="text" name="email" value=""><br>
-							<label>Password: </label><br>
-							<input type="password" name="password" value=""><br><br>
-							<input type="submit" name="submit" value="Log In">
-						</form>
-					</div>
+<h2 class="text-center title">Welcome Back</h2>
+<h3 class="text-center title-2">Let's log in and look at your Wish List</h3><br>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4"></div>
+			<div class="col-sm-4 offset-sm-4 boxes">
+				<form method="POST" action="/log_in" class="text-center">
+					<label>Username: </label><br>
+					<input type="text" name="username" value=""><br>
+
+					<label>Password: </label><br>
+					<input type="password" name="password" value=""><br><br>
+					<input type="submit" name="submit" value="Log In">
+				</form>
 			</div>
-		</div>
+	</div>
+</div>
 
 				

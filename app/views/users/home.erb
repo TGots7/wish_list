@@ -1,70 +1,62 @@
-	<% if flash.has?(:message) %>
-	 <div class="flash_green"> <%= flash[:message] %> </div>
-	<% end %>
-<div class="jumbotron">
-	<h1 class="text-center">Welcome <%=@user.name.capitalize %> </h1>
-</div>	
-	<!--Add all wishes to be seen! -->
+<h1 class="text-center title">Welcome <%= current_user.username %> </h1>
+
 <div class="container">
 	<div class="row">
 		<div class="col-sm-4"></div>
-			<div class="col-sm-4 offset-sm-4 box">
-			<ol>
+			<div class="col-sm-4 box">
 				<h4 class="text-center">Your Wish List</h4>
-				<% Wish.all.each do |wish| %>
-				<% if wish.user.name == @user.name %>
-					
-				<li>	<div class="text"><p class="text-center" ><%= wish.content %> </p></div> </li>
-
-						<% Event.all.each do |e| %>
-					        <input type="checkbox" name="wish[e]" value="<%= e.event %>" class="text-center" <%= 'checked' if wish.events.include?(e) %>> <%= e.event %> 
-					        <% end %>
-
-					<div class="row">	
-						<div class="col-sm-6">	
-							<form method="get" action="/wishes/<%= wish.id %>/edit" class="text-center buttons" >
-									<button type="submit">-Edit-</button>
-							</form>
+					<% current_user.wishes.each do |wish| %>	
+						<div class="text">
+							<p class="text-center" ><%= wish.content %></p>
 						</div>
-						<div class="col-sm-6">
-							<form method="POST" action="/wishes/<%= wish.id %>/delete" class="text-center buttons">
-								<input id="hidden" type="hidden" name="_method" value="delete">
-								<input type="submit" name="submit" value="-Delete-">
-							</form>
-						</div>	
-					</div>
-				<% end %>			
-				<% end %>
-			</ol>
-			</div>
+
+						<% @events.each do |event| %>
+					        <input 
+					        	type="checkbox" 
+					        	name="wish[event]" 
+					        	value="<%= event.event %>" 
+					        	class="text-center" 
+					        	<%= 'checked' if wish.events.include?(event) %>> <%= event.event %>
+					    <% end %>
+
+						<div class="row">	
+							<div class="col-sm-6">	
+								<form method="get" action="/wishes/<%= wish.id %>/edit" class="text-center buttons" >
+									<button type="submit">-Edit-</button>
+								</form>
+							</div>
+							<div class="col-sm-6">
+								<form method="POST" action="/wishes/<%= wish.id %>/delete" class="text-center buttons">
+									<input id="hidden" type="hidden" name="_method" value="delete">
+									<input type="submit" name="submit" value="-Delete-">
+								</form>
+							</div>	
+						</div>
+					<% end %>
+
+			
 		</div>		
 	</div>
-</div>
-	
-		
 
 <div class="row">
-<div class="col-sm-4"></div>
-<div class="col-sm-4">
+	<div class="col-sm-4"></div>
 	<div class="col-sm-4">
-		<form method="get" action="/add_wish" class="text-center buttons">
-			<button type="submit">-New Wish-</button>
-		</form>
-	</div>
-	<div class="col-sm-4">
-		<form method="get" action="/all_wishes" class="text-center buttons">
-			<button type="submit">-All Wishes-</button>
-		</form>
-	</div>
-
-	<!-- <h4 class="text-center"><a href="/add_wish">Add to your Wish List</a></h4>
-
-	<h4 class="text-center"><a href="/all_wishes">See Everyones Wishes</a></h4>
- --><div class="col-sm-4">
-		<form method="get" action="/logout" class="text-center buttons">
-			<button type="submit">-Logout-</button>
-		</form>
+		<div class="col-sm-4">
+				<a href="/wishes/new" class="text-center buttons">
+					<button type="submit">New Wish</button>
+				</a>
+		</div>
+		<div class="col-sm-4">
+				<a href="/wishes" class="text-center buttons">
+					<button type="submit">All Wishes</button>
+				</a>
+		</div>
+ 		<div class="col-sm-4">
+				<a href="/logout" class="text-center buttons">
+					<button type="submit">Logout</button>
+				</a>
 		</div>
 	</div>
 </div>
+
    
