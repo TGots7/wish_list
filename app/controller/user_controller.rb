@@ -1,7 +1,6 @@
 class UserController < ApplicationController
 
 	get '/sign_up' do
-		
 		if logged_in?
 			redirect '/home'
 		else
@@ -51,7 +50,6 @@ class UserController < ApplicationController
 	end
 
 	get '/home' do 
-		
 		if logged_in?	
 			@events = Event.all
 			erb :'/users/home'

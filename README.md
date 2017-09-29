@@ -2,8 +2,8 @@ Wish List
 
 This is a personal project, I built this Wish List Sinatra App for a course I am taking at Flatiron School.
 
-Give examples
 Installing
+Simply clone this directory from GitHub, run bundle install in the terminal. After run the shotgun command to start your server and intereact with the web app.
 
 A step by step series of examples that tell you have to get a development env running
 
@@ -27,3 +27,7 @@ License
 
 This project is licensed under #Learn.co Educational Content License
  - see the LICENSE.md file for details
+
+ Contributors
+
+ This project was done for the Flatiron School in New York, NY and many of it's ideas came from course material and lecture material.
