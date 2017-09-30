@@ -31,7 +31,6 @@ class WishController < ApplicationController
 
 	get '/wishes' do
 		if logged_in?
-			@user = current_user
 			@wishes = Wish.all
 			@events = Event.all
 			erb :'/wishes/index'
