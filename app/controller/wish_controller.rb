@@ -1,10 +1,12 @@
 class WishController < ApplicationController
 
 	get '/wishes/new' do
+		@events = Event.all
 		erb :'/wishes/new'
 	end
 
 	post '/wishes' do
+		@events = Event.all
 		if params[:wish].empty? || params[:wish] == "Add a wish"
 			flash[:message] = "Please properly fill out a wish"
 			redirect '/wishes/new'
@@ -30,6 +32,8 @@ class WishController < ApplicationController
 	get '/wishes' do
 		if logged_in?
 			@user = current_user
+			@wishes = Wish.all
+			@events = Event.all
 			erb :'/wishes/index'
 		else
 			redirect '/'
@@ -40,6 +44,7 @@ class WishController < ApplicationController
 		if logged_in?
 			if current_user.wish_ids.include?(params[:id].to_d)
 				@wish = Wish.find_by_id(params[:id])
+				@events = Event.all
 				erb :'/wishes/edit'
 			else
 				redirect '/home'

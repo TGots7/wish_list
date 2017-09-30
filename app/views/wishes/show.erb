@@ -6,7 +6,7 @@
 						<div class="col-sm-4 offset-sm-4 box">	
 
 							<div class="text"><p class="text-center"> <%= @new_wish.content %> </p></div>
-								<% Event.all.each do |event| %>
+								<% @events.each do |event| %>
 						         	<input type="checkbox" name="wish[event]" value="<%= event.event %>" class="text-center" <%= 'checked' if @new_wish.events.include?(event) %>> <%= event.event %>
 						        <% end %>
 						        

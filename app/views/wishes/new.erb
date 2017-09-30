@@ -9,7 +9,7 @@
 					<label>Add Wish:</label><br>
 					<input type="text" name="wish[content]" value="Add a wish"><br>
 					
-				    <% Event.all.each do |event| %>
+				    <% @events.each do |event| %>
 				        <input id="event_<%= event.id %>" type="checkbox" name="wish[event_ids][]" value="<%= event.id %>" class="text-center"> <%= event.event %>
 				    <% end %>
 				    
