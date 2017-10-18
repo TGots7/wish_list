@@ -52,7 +52,8 @@ body {
 	padding: 0px;
 	height: auto;
 	color: #f2f2f2;
-	font-family: 'Cormorant Unicase', serif;
+	/*font-family: 'Cormorant Unicase', serif;*/
+	font-family: 'Metal Mania', cursive;
 }
 .home_box a {
 	color: white;
