@@ -1,19 +1,24 @@
 <h1 class="text-center title">Welcome <%= current_user.username %> </h1>
 <h4 class="text-center ">Edit this wish</h4>	
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4"></div>
-					<div class="col-sm-4 box">
-						<form method="POST" action="/wishes/<%= @wish.id %>" class="text-center">
-							<input type="hidden" name="_method" value="patch">	
-							<input type="text" name="wish[content]" value="<%= @wish.content %>"><br>
-					        <% @events.each do |event| %>
-					            <input id="event_<%= event.id %>" type="checkbox" name="wish[event_ids][]" value="<%= event.id %>" class="text-center"<%= 'checked' if @wish.events.include?(event) %>> <%= event.event %> 
-					        <% end %>
-						        <br> or create new Event:<br>
-						        <input type="text" name="event" class="text-center"><br>
-						        <input type="submit" name="submit" value="submit"><br>
-						 </form>
-					</div>
-			</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4 box">
+			<form method="POST" action="/wishes/<%= @wish.id %>" class="text-center">
+				<input type="hidden" name="_method" value="patch">	
+				<input type="text" name="wish[content]" value="<%= @wish.content %>"><br>
+		        <% @events.each do |event| %>
+		            <input 
+		            	id="event_<%= event.id %>" 
+		            	type="checkbox" name="wish[event_ids][]" 
+		            	value="<%= event.id %>" class="text-center"<%= 'checked' if @wish.events.include?(event) %>
+		            > 
+		            <label><%= event.event %></label>
+		        <% end %>
+		        <br> or create new Event:<br>
+		        <input type="text" name="event" class="text-center"><br>
+		        <input type="submit" name="submit" value="submit"><br>
+			 </form>
 		</div>
+	</div>
+</div>

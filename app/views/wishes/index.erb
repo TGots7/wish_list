@@ -5,7 +5,7 @@
 			<div class="col-sm-4 box">
 				<% @wishes.each do |wish| %>
 
-						<% if wish.user.username == current_user.username %>
+						<% if wish.user == current_user %>
 							<h4>YOU wished for:</h4>
 						<% else %>
 							<h4><%= wish.user.username %> wished for:</h4>

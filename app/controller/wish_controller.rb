@@ -12,8 +12,7 @@ class WishController < ApplicationController
 			redirect '/wishes/new'
 		else
 			if logged_in?
-				@new_wish = Wish.create(params[:wish])
-				@new_wish.user_id = current_user.id #which ever user is logged in
+				@new_wish = current_user.wishes.build(params[:wish])
 				if params["event"].empty?
 					@new_wish.save
 				else
@@ -41,8 +40,7 @@ class WishController < ApplicationController
 	#only be able to edit if the wish is the current_users
 	get '/wishes/:id/edit' do
 		if logged_in?
-			if current_user.wish_ids.include?(params[:id].to_d)
-				@wish = Wish.find_by_id(params[:id])
+			if @wish = current_user.wishes.find_by_id(params[:id])
 				@events = Event.all
 				erb :'/wishes/edit'
 			else
@@ -56,27 +54,26 @@ class WishController < ApplicationController
 	patch '/wishes/:id' do
 		if params[:wish].empty?
 			redirect '/home'
-		else
-			if logged_in?
-				@wish = Wish.find_by_id(params[:id])
+		elsif logged_in?
+			if @wish = current_user.wishes.find_by_id(params[:id])
 				@wish.content = params[:content]
 				@wish.update(params[:wish])
 				@wish.save
 
 				flash[:message] = "Your wish was edited"
-				redirect '/home'
-			else
-				redirect '/'
+			else 
+				flash[:message] = "Your unable to edit this wish"
 			end
+			redirect '/home'
+		else
+			redirect '/'
 		end
 	end
 
 	delete '/wishes/:id/delete' do
 		if logged_in? 
-			if current_user.wish_ids.include?(params[:id].to_d) 
-				@wish = Wish.find_by_id(params[:id])
+			if @wish = current_user.wishes.find_by_id(params[:id])
 				@wish.delete
-
 				flash[:message] = "Your wish was deleted"
 				redirect '/home'
 			else
